@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   s.add_dependency "progressbar"
   s.add_dependency "parallel"
   s.add_dependency "andand"
-  s.add_dependency "activerecord", "~> 2.3.12"
+  s.add_dependency "activerecord"
 
   s.files        = `git ls-files`.split("\n")
   s.test_files   = `git ls-files -- {test,spec,features}/*`.split("\n")
