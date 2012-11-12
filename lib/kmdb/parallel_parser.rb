@@ -3,7 +3,7 @@ require 'parallel'
 
 module KMDB
   class ParallelParser < Parser
-    
+
     def initialize(options = {})
       super(options)
       @worker_count = options.delete(:workers) || Parallel.processor_count
@@ -13,9 +13,17 @@ module KMDB
       @pipe_rd, @pipe_wr = IO.pipe
 
       inputs = list_files_in(argv)
+      puts "Argv"
+      puts argv
+      puts "Using inputs"
+      puts inputs
       total_bytes = total_size_of_files(inputs)
       log "total bytes : #{total_bytes}"
-      total_bytes -= inputs.map { |p| Dumpfile.get(p, @resume_job) }.compact.map(&:offset).sum
+      a = inputs.map { |p| Dumpfile.get(p, @resume_job) }
+      b = a.compact
+      c = b.map(&:offset)
+      total_bytes -= c.sum
+      # total_bytes -= inputs.map { |p| Dumpfile.get(p, @resume_job) }.compact.map(&:offset).sum
       log "left to process : #{total_bytes}"
 
       # Start workers

@@ -3,7 +3,7 @@
   Base class for KM data.
   Connect to a secondary database to store events, users, & properties.
 
-  FIXME: the database connection is hard-coded for now.
+FIXME: the database connection is hard-coded for now.
 
 =end
 
@@ -15,6 +15,8 @@ require 'kmdb/migration'
 
 module KMDB
   class CustomRecord < ActiveRecord::Base
+    set_table_name "dumpfiles"
+
     DefaultConfig = {
       'adapter'  => 'sqlite3',
       'database' => "test.db"
@@ -43,7 +45,9 @@ module KMDB
         config.merge! YAML.load(ERB.new(File.open(config_path).read).result)
         break
       end
+
       establish_connection(config)
+      ActiveRecord::Base.establish_connection(config)
 
       unless connection.table_exists?('events')
         SetupEventsDatabase.up

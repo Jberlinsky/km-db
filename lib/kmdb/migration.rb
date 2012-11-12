@@ -1,5 +1,5 @@
 =begin
-  
+
   Setup a custom database for KissMetrics tracking events.
 
 =end
@@ -13,6 +13,7 @@ module KMDB
     end
 
     def self.up
+
       create_table :events do |t|
         t.integer  :user_id
         t.integer  :n
@@ -55,9 +56,10 @@ module KMDB
 
     def self.down
       drop_table :events
+      drop_table :keys
       drop_table :properties
       drop_table :users
-      drop_table :aliases
+      drop_table :dumpfiles
     end
   end
 end
