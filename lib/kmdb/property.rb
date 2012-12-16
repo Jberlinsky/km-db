@@ -19,7 +19,7 @@ module KMDB
       stamp = Time.at hash.delete('_t') || stamp
 
       return if hash.empty?
-      sql_insert = "INSERT INTO `#{table_name}` (`t`,`user_id`,`event_id`,`key`,`value`) VALUES "
+      sql_insert = "INSERT INTO #{table_name} (t,user_id,event_id,key,value) VALUES "
       sql_values = []
 
       hash.each_pair do |prop_name,value|
