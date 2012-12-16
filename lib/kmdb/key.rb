@@ -16,7 +16,7 @@ module KMDB
     scope :has_duplicate, lambda {
       {
         :select => "id, string, COUNT(id) AS quantity",
-        :group => :string, :having => "quantity > 1"
+        :group => "string, id", :having => "COUNT(id) > 1"
       }
     }
 
