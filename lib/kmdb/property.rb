@@ -24,7 +24,7 @@ module KMDB
 
       hash.each_pair do |prop_name,value|
         key = Key.get(prop_name)
-        sql_values << sanitize_sql_array(["(?,?,?,?,?)", stamp,user.id,event_id,key,value])
+        sql_values << sanitize_sql_array(["(?,?,?,?,?)", stamp,user.id,event_id,key,value[0,254]])
       end
 
       connection.execute(sql_insert + sql_values.join(","))
