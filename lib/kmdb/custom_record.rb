@@ -49,6 +49,11 @@ module KMDB
       establish_connection(config)
       ActiveRecord::Base.establish_connection(config)
 
+      if ENV['DROP_DATABASE'] == 'true' and connection.table_exists?("events")
+        SetupEventsDatabase.down
+        self.reset_column_information
+      end
+
       unless connection.table_exists?('events')
         SetupEventsDatabase.up
         self.reset_column_information

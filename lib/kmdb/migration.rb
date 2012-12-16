@@ -24,7 +24,7 @@ module KMDB
 
 
       create_table :keys do |t|
-        t.string :string, :limit => MaxStringSize
+        t.string :string
       end
       add_index :keys, [:string]
 
@@ -32,7 +32,7 @@ module KMDB
         t.integer  :user_id
         t.integer  :event_id
         t.integer  :key
-        t.string   :value,   :limit => 64
+        t.string   :value
         t.datetime :t
       end
       add_index :properties, [:key]
@@ -40,7 +40,7 @@ module KMDB
       add_index :properties, [:event_id]
 
       create_table :users do |t|
-        t.string  :name, :limit => 48
+        t.string  :name
         t.integer :alias_id
       end
       add_index :users, [:name]
