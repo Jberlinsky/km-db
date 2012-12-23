@@ -24,13 +24,13 @@ module KMDB
 
     def self.disable_index
       connection.execute %Q{
-        ALTER TABLE `#{table_name}` DISABLE KEYS;
+        ALTER TABLE #{table_name} DISABLE KEYS;
       }
     end
 
     def self.enable_index
       connection.execute %Q{
-        ALTER TABLE `#{table_name}` ENABLE KEYS;
+        ALTER TABLE #{table_name} ENABLE KEYS;
       }
     end
 

@@ -9,12 +9,12 @@ module KMDB
 
     set_table_name "events"
 
-    scope :before, lambda { |date| { :conditions => ["`#{table_name}`.`t` < ?", date] } }
-    scope :after,  lambda { |date| { :conditions => ["`#{table_name}`.`t` > ?", date] } }
+    scope :before, lambda { |date| { :conditions => ["#{table_name}.t < ?", date.to_s(:db)] } }
+    scope :after,  lambda { |date| { :conditions => ["#{table_name}.t > ?", date.to_s(:db)] } }
 
     scope :named, lambda { |name| { :conditions => { :n => KMDB::Key.get(name) } } }
 
-    scope :by_date, lambda { { :order => "`#{table_name}`.`t` ASC" } }
+    scope :by_date, lambda { { :order => "#{table_name}.t ASC" } }
 
     # return value of property
     def prop(name)

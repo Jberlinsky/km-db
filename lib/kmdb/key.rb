@@ -40,8 +40,8 @@ module KMDB
         }
         id_to_keep = all_ids.pop
         $stderr.write "Fixing key '#{string}' #{all_ids.inspect} -> #{id_to_keep.inspect}\n"
-        Event.update_all({ :n => id_to_keep }, ["`events`.`n` IN (?)", all_ids])
-        Property.update_all({ :key => id_to_keep }, ["`properties`.`key` IN (?)", all_ids])
+        Event.update_all({ :n => id_to_keep }, ["events.n IN (?)", all_ids])
+        Property.update_all({ :key => id_to_keep }, ["properties.key IN (?)", all_ids])
         Key.delete_all(["id IN (?)", all_ids])
       end
     end
