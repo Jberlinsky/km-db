@@ -54,7 +54,10 @@ module KMDB
       @progress = ProgressBar.new("-" * 20, total_bytes)
       @progress.long_running if @progress.respond_to?(:long_running)
 
-      inputs.sort.each do |input|
+      sorted_inputs = inputs.sort { |p, q| p.to_s.split("_").last.split(".").first.to_i <=> q.to_s.split("_").last.split(".").first.to_i }
+      sorted_inputs.reverse! if ENV['MOST_RECENT_IMPORT_FIRST'] == 'true'
+
+      sorted_inputs.each do |input|
         process_events_in_file(input)
       end
 
