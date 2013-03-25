@@ -35,7 +35,16 @@ module KMDB
     end
 
     def self.find_or_create(options)
-      find(:first, :conditions => options) || create(options)
+      begin
+        find(:first, :conditions => options) || create(options)
+      rescue Exception => e
+        puts "An error occurred :("
+        puts "Options hash:"
+        puts options.inspect
+        puts "Error message:"
+        puts e.message
+        # binding.pry
+      end
     end
 
     def self.connect_to_km_db!

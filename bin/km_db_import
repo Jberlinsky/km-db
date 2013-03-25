@@ -7,6 +7,7 @@
 
 require 'rubygems'
 require 'kmdb'
+require 'pry'
 
 if KMDB::Event.connection.class.to_s =~ /(mysql|pgsql)/i
   parser_class = KMDB::ParallelParser
